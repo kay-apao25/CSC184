@@ -138,7 +138,7 @@ if __name__ == '__main__':
     # Downloaded images
     singleton.downloaded = set()
     
-    
+    traverse_site()
 
     # Create images directory if not exists
     if not os.path.exists('images'):
@@ -148,7 +148,6 @@ if __name__ == '__main__':
     thread1 = ImageDownloaderThread(1, "Thread-1", 1)
     thread2 = ImageDownloaderThread(2, "Thread-2", 2)
 
-    traverse_site()
 
     # Start new Threads
     thread1.start()
