@@ -12,17 +12,6 @@ class Singleton(object):
             cls.instance = super(Singleton, cls).__new__(cls)
         return cls.instance
 
-class Borg(object):
-    _shared_state = {}
-    
-    def __new__(cls, *args, **kwargs):
-        obj = super(Borg, cls).__new__(cls, *args, **kwargs)
-        obj.__dict__ = cls._shared_state
-        return obj
-
-class Child(Borg):
-    pass
-
 class ImageDownloaderThread(threading.Thread):
     """A thread for downloading miages in parallel."""
     def __init__(self, thread_id, name, counter):
@@ -37,10 +26,9 @@ class ImageDownloaderThread(threading.Thread):
 def traverse_site(max_links=10):
     link_parser_singleton = Singleton()
 
-    # While we have pages to parse in queue 
-        
+    # While we have pages to parse in queue         
     while link_parser_singleton.queue_to_parse:
-    # If collected enough links to download images, return
+        # If collected enough links to download images, return
         if len(link_parser_singleton.to_visit) == max_links:
             return
   
@@ -85,7 +73,8 @@ def traverse_site(max_links=10):
                  continue
 
              # Add a link for further parsing
-             link_parser_singleton.queue_to_parse = [link_url] + link_parser_singleton.queue_to_parse
+             link_parser_singleton.queue_to_parse = [link_url] +\
+             link_parser_singleton.queue_to_parse
 
 def download_images(thread_name):
     singleton = Singleton()
@@ -126,7 +115,7 @@ def download_images(thread_name):
         print thread_name, 'finished downloading images from', url
 
 if __name__ == '__main__':
-    root = 'http://tipidpc.com'
+    root = 'http://google.com'
 
     parsed_root = urlparse(root)
 
@@ -137,7 +126,8 @@ if __name__ == '__main__':
     # Downloaded images
     singleton.downloaded = set()
     
-    traverse_site()
+    class AnotherChild(Borg):
+_shared_state = {}
 
     # Create images directory if not exists
     if not os.path.exists('images'):
@@ -146,7 +136,6 @@ if __name__ == '__main__':
      # Create new threads
     thread1 = ImageDownloaderThread(1, "Thread-1", 1)
     thread2 = ImageDownloaderThread(2, "Thread-2", 2)
-
 
     # Start new Threads
     thread1.start()
