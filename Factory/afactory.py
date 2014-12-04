@@ -89,7 +89,7 @@ class HTTPParser(Parser):
     def __call__(self, content):
         filenames = []
         soup = BeautifulStoneSoup(content)
-        links = soup.table.findAll('a')
+        links = soup.findAll('a')
         for link in links:
             filenames.append(link.text)
         return '\n'.join(filenames)
@@ -123,9 +123,11 @@ class Connector(object):
         pass
 
 if __name__ == '__main__':
+    #domain = 'localhost'
+    #path = ''
     domain = 'ftp.freebsd.org'
     path = '/pub/FreeBSD/'
-
+    
     protocol = input('Connecting to {}. Which Protocol to use? (0-http, \
     1-ftp): '.format(domain))
 

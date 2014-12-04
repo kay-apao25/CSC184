@@ -1,5 +1,6 @@
 import abc
 import urllib2
+import os
 from BeautifulSoup import BeautifulStoneSoup
 
 class Connector(object):
@@ -20,6 +21,7 @@ class Connector(object):
     def read(self, host, path):
         """A generic method for all subclasses, reads web content."""
         url = self.protocol + '://' + host + ':' + str(self.port) + path
+        #url = self.protocol + '://' + host + path
         print 'Connecting to ', url
         return urllib2.urlopen(url, timeout=2).read()
 
@@ -55,6 +57,7 @@ class HTTPConnector(Connector):
         links = soup.table.findAll('a')
         for link in links:
             filenames.append(link['href'])
+            #basename = os.path.basename(src)
         return '\n'.join(filenames)
 
 class FTPConnector(Connector):
@@ -89,20 +92,25 @@ class HTTPPort(Port):
     """A concrete product which represents http port."""
     def __str__(self):
         return '80'
+        
 
 class HTTPSecurePort(Port):
     """A concrete product which represents https port."""
     def __str__(self):
         return '443'
 
+
 class FTPPort(Port):
     """A concrete product which represents ftp port."""
     def __str__(self):
         return '21'
 
+
 if __name__ == '__main__':
     domain = 'ftp.freebsd.org'
     path = '/pub/FreeBSD/'
+    #domain = 'ftp.freebsd.org'
+    #path = ''
     
     protocol = input('Connecting to {}. Which Protocol to use? (0-http,\
     1-ftp): '.format(domain))
@@ -119,4 +127,16 @@ if __name__ == '__main__':
     except urllib2.URLError, e:
         print 'Can not access resource with this method'
     else:
+        #if not os.path.exists('files'):
+        #	os.makedirs('files')
+        #os.path.join('files', 'ok')
+        f = open('myfile','w')
+        f.write(connector.parse(content)) # python will convert \n to os.linesep
+        f.close() 
+        #open('myfile', 'rb').read()
+        #file = []
+        #file.append(link['href'])
+        #print file
+        #print open('myfile', 'r').readline
         print connector.parse(content)
+
