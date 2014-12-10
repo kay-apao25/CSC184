@@ -36,7 +36,7 @@ class Observer(object):
 #They need to implement notify method. This method will take UNIX
 #timestamp converts it to 12H or 24H format and print it to
 #standard out.
-
+f = open('myfile', 'w')
 class USATimeObserver(Observer):
     def __init__(self, name):
         self.name = name
@@ -45,6 +45,7 @@ class USATimeObserver(Observer):
         time = datetime.datetime.fromtimestamp(int(unix_timestamp)).strftime('%Y-' \
         '%m-%d %I:%M%p')
         print 'Observer', self.name, 'says:', time
+        f.write(str('Observer ' + self.name + ' says: ' + time + '\n'))
 
 class EUTimeObserver(Observer):
     def __init__(self, name):
@@ -54,22 +55,28 @@ class EUTimeObserver(Observer):
         time = datetime.datetime.fromtimestamp(int(unix_timestamp)).strftime('%Y-' \
         '%m-%d %H:%M')
         print 'Observer', self.name, 'says:', time
+        f.write('Observer ' + self.name + ' says: ' + time + '\n')
 
 if __name__ == '__main__':
+    
     subject = Subject()
 
     print 'Adding usa_time_observer'
+    f.write('Adding usa_time_observer\n')
     observer1 = USATimeObserver('usa_time_observer')
     subject.register_observer(observer1)
     subject.notify_observers()
 
     time.sleep(2)
     print 'Adding eu_time_observer'
+    f.write('Adding eu_time_observer\n')
     observer2 = EUTimeObserver('eu_time_observer')
     subject.register_observer(observer2)
     subject.notify_observers()
 
     time.sleep(2)
     print 'Removing usa_time_observer'
+    f.write('Removing usa_time_observer\n')
     subject.unregister_observer(observer1)
     subject.notify_observers()
+    f.close()

@@ -10,9 +10,9 @@ Feature: Observer Design Pattern: Able to add USA and Europe time Observers
 	Then I can see the following:
 	|Processes																		|							
 	|Adding usa_time_observer   													|
-	|Observer usa_time_observer says: 2014-12-10 07:26PM						|										
+	|Observer usa_time_observer says: 2014-12-10 07:59PM						|										
 	|Adding eu_time_observer														|
-	|Observer usa_time_observer says: 2014-12-10 07:26PM						|
-	|Observer eu_time_observer says: 2014-12-10 19:26							|
+	|Observer usa_time_observer says: 2014-12-10 07:59PM						|
+	|Observer eu_time_observer says: 2014-12-10 19:59							|
 	|Removing usa_time_observer													|
-	|Observer eu_time_observer says: 2014-12-10 19:26							|
+	|Observer eu_time_observer says: 2014-12-10 19:59							|
