@@ -1,4 +1,4 @@
-Feature: Facade Design Pattern: Able to count the reference links to a certain object upon creation and deletion
+Feature: Proxy Design Pattern: Able to count the reference links to a certain object upon creation and deletion
          
          As a user I wish to be able to know if the number of reference links are consistent when I add and then delete the	 		referential links
         
