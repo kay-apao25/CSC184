@@ -2,7 +2,7 @@ Feature: Proxy Design Pattern: Able to count the reference links to a certain ob
          
          As a user I wish to be able to know if the number of reference links are consistent when I add and then delete the	 		referential links
         
-	Scenario Outline: Get number of referential links to an object
+	Scenario Outline: Get number of reference links to an object
 	Given I run proxy file
 	When it finishes creating the main object 
 	And after creating the references to that object
