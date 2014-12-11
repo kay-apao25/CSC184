@@ -38,45 +38,56 @@ class Observer(object):
 #standard out.
 f = open('myfile', 'w')
 class USATimeObserver(Observer):
+    n = 0
     def __init__(self, name):
         self.name = name
 
     def notify(self, unix_timestamp):
         time = datetime.datetime.fromtimestamp(int(unix_timestamp)).strftime('%Y-' \
         '%m-%d %I:%M%p')
-        print 'Observer', self.name, 'says:', time
-        f.write(str('Observer ' + self.name + ' says: ' + time + '\n'))
+        self.__class__.n += 1
+        #print 'Observer', self.name, 'says:', time
+        if self.__class__.n == 2:
+            f.write(str('Observer ' + self.name + ' says: ' + time + '\n'))
 
 class EUTimeObserver(Observer):
+    n = 0
     def __init__(self, name):
         self.name = name
 
     def notify(self, unix_timestamp):
         time = datetime.datetime.fromtimestamp(int(unix_timestamp)).strftime('%Y-' \
         '%m-%d %H:%M')
-        print 'Observer', self.name, 'says:', time
-        f.write('Observer ' + self.name + ' says: ' + time + '\n')
+        self.__class__.n += 1 
+        #print 'Observer', self.name, 'says:', time
+        if self.__class__.n == 2:
+            f.write('Observer ' + self.name + ' says: ' + time + '\n')
 
 if __name__ == '__main__':
     
     subject = Subject()
 
-    print 'Adding usa_time_observer'
-    f.write('Adding usa_time_observer\n')
+    #print 'Adding usa_time_observer'
+    #f.write('Adding usa_time_observer\n')
     observer1 = USATimeObserver('usa_time_observer')
     subject.register_observer(observer1)
     subject.notify_observers()
+    #f.write('After adding USA time observer: %d\n' % len(subject.observers))
+
 
     time.sleep(2)
-    print 'Adding eu_time_observer'
-    f.write('Adding eu_time_observer\n')
+    #print 'Adding eu_time_observer'
+    #f.write('Adding eu_time_observer\n')
     observer2 = EUTimeObserver('eu_time_observer')
     subject.register_observer(observer2)
     subject.notify_observers()
+    #f.write('After adding EU time observer: %d\n' % len(subject.observers))
 
     time.sleep(2)
-    print 'Removing usa_time_observer'
-    f.write('Removing usa_time_observer\n')
+    #print 'Removing usa_time_observer'
+    #f.write('Removing usa_time_observer\n')
     subject.unregister_observer(observer1)
     subject.notify_observers()
+    #f.write('After deleting USA time observer: %d\n' % len(subject.observers))
+
     f.close()

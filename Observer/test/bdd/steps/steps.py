@@ -7,16 +7,8 @@ import os
 def given_i_run_observer_file(step):
     os.system('python observer.py')
 
-@step(u'When it registers the first observer and displays the 12-hour time format')
-def when_it_registers_the_first_observer_and_displays_the_12_hour_time_format(step):
-    assert True
-
-@step(u'And it registers another server and displays both the 12-hour and 24-hour time format')
-def and_it_registers_another_server_and_displays_both_the_12_hour_and_24_hour_time_format(step):
-    assert True
-
-@step(u'And then unregisters the first observer and display the 24-hour format')
-def and_then_unregisters_the_first_observer_and_display_the_24_hour_format(step):
+@step(u'When it registers the usa and eu time observers')
+def when_it_registers_the_usa_and_eu_time_observers(step):
     assert True
 
 @step(u'Then I can see the following:')

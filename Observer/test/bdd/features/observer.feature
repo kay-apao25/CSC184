@@ -4,15 +4,9 @@ Feature: Observer Design Pattern: Able to add USA and Europe time Observers
         
 	Scenario Outline: Get 12-hour format and 24-hour time format
 	Given I run observer file
-	When it registers the first observer and displays the 12-hour time format 
-	And it registers another server and displays both the 12-hour and 24-hour time format
-	And then unregisters the first observer and display the 24-hour format
+	When it registers the usa and eu time observers 
 	Then I can see the following:
-	|Processes																		|							
-	|Adding usa_time_observer   													|
-	|Observer usa_time_observer says: 2014-12-10 07:59PM						|										
-	|Adding eu_time_observer														|
-	|Observer usa_time_observer says: 2014-12-10 07:59PM						|
-	|Observer eu_time_observer says: 2014-12-10 19:59							|
-	|Removing usa_time_observer													|
-	|Observer eu_time_observer says: 2014-12-10 19:59							|
+	|Processes																	|							
+	|Observer usa_time_observer says: 2014-12-11 11:44AM						|										
+	|Observer eu_time_observer says: 2014-12-11 11:44							|
+	
