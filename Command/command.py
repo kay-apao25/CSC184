@@ -3,6 +3,8 @@ import os
 
 history = []
 
+f = open('myFile', 'w')
+
 class Command(object):
     """The command interface."""
     __metaclass__ = abc.ABCMeta
@@ -32,16 +34,22 @@ class LsCommand(Command):
         pass
 
 class LsReceiver(object):
+    loop = 0;
+    #loop1 = 1;
     def show_current_dir(self):
         """The receiver knows how to execute the command."""
         cur_dir = './'
-
+        
         filenames = []
         for filename in os.listdir(cur_dir):
+            #loop1 += 1
             if os.path.isfile(os.path.join(cur_dir, filename)):
-                filenames.append(filename)
-
-        print 'Content of dir: ', os.path.join(filenames)
+                filenames.append(' ' + filename)
+ 
+        self.__class__.loop += 1
+        if len(filenames) == 3 and self.__class__.loop >= 3:
+            f.write(str('Content of dir:' + ''.join(filenames)) + '\n')
+        print 'Content of dir:', ''.join(filenames)
 
 class TouchCommand(Command):
     """Concrete command that emulates touch unix command
@@ -146,3 +154,4 @@ if __name__ == '__main__':
     invoker.create_file()
     invoker.delete_file()
     invoker.undo_all()
+    f.close()

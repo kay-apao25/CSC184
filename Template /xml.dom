@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>A RSS example</title>
+<subtitle>Description of RSS example</subtitle>
+<link href="http://example.org/"/>
+<entry>
+<id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
+<title>The first news</title>
+<link href="http://example.com/first"/>
+<summary>Some description of the second news</summary>
+<updated>2013-09-30T13:00:00Z</updated>
+</entry>
+</feed>
