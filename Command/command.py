@@ -39,10 +39,10 @@ class LsReceiver(object):
     def show_current_dir(self):
         """The receiver knows how to execute the command."""
         cur_dir = './'
+
         
         filenames = []
         for filename in os.listdir(cur_dir):
-            #loop1 += 1
             if os.path.isfile(os.path.join(cur_dir, filename)):
                 filenames.append(' ' + filename)
  
@@ -111,6 +111,7 @@ class Invoker(object):
 
     def create_file(self):
         print 'Creating file...'
+       
         for command in self.create_file_commands:
             command.execute()
             self.history.append(command)
@@ -141,10 +142,11 @@ if __name__ == '__main__':
     # Create a file
     touch_receiver = TouchReceiver('test_file')
     touch_command = TouchCommand(touch_receiver)
-
+    
     # Delete created file
     rm_receiver = RmReceiver('test_file')
     rm_command = RmCommand(rm_receiver)
+
 
     create_file_commands = [ls_command, touch_command, ls_command]
     delete_file_commands = [ls_command, rm_command, ls_command]

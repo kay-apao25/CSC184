@@ -118,11 +118,11 @@ class GoogleParser(AbstractNewsParser):
 
 if __name__ == '__main__':
     file = open('myFile', 'w')
-    gnews = 'Google: \n', google.print_top_news()
-    ynews = 'Yahoo: \n', yahoo.print_top_news()
     
     google = GoogleParser()
     yahoo = YahooParser()
+    gnews = 'Google: \n', google.print_top_news()
+    ynews = 'Yahoo: \n', yahoo.print_top_news()
     
     file.write(str(gnews))
     print 'Google: \n', google.print_top_news()
