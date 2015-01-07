@@ -10,8 +10,8 @@ def given_i_run_command_file(step):
 def when_it_creates_and_deletes_a_file(step):
     assert True
 
-@step(u'The I can see the following:')
-def the_i_can_see_the_following(step):
+@step(u'Then I can see the following:')
+def then_i_can_see_the_following(step):
     file = open('myFile', 'r')
     for row in step.hashes:
         n = file.readline().splitlines()

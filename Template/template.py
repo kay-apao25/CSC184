@@ -2,6 +2,8 @@ import urllib2
 from xml.dom import minidom
 
 # To make http requests to RSS and Atom feeds
+file = open('myFile', 'w')
+
 class AbstractNewsParser(object):
     def __init__(self):
         # Prohibit creating class instance
@@ -16,13 +18,17 @@ class AbstractNewsParser(object):
         content = self.parse_content(raw_content)
         
         cropped = self.crop(content)
+        #n = 0
 
         for item in cropped:
+            #if self.n <= 9:
+            file.write(str(item['title'] + '\n'))
             print 'Title: ', item['title']
             print 'Content: ', item['content']
             print 'Link: ', item['link']
             print 'Published: ', item['published']
             print 'Id: ', item['id']
+            #self.n = self.n + 1
 
     def get_url(self):
         raise NotImplementedError()
@@ -37,10 +43,12 @@ class AbstractNewsParser(object):
         return parsed_content[:max_items]
 
 class YahooParser(AbstractNewsParser):
+    n = 9
     def get_url(self):
         return 'http://news.yahoo.com/rss/'
 
     def parse_content(self, raw_content):
+        #file.write('Yahoo: \n')
         parsed_content = []
 
         dom = minidom.parseString(raw_content)
@@ -78,10 +86,12 @@ class YahooParser(AbstractNewsParser):
         return parsed_content
 
 class GoogleParser(AbstractNewsParser):
+    n = 0
     def get_url(self):
         return 'https://news.google.com/news/feeds?output=atom'
 
     def parse_content(self, raw_content):
+        #file.write('Google: \n')
         parsed_content = []
         dom = minidom.parseString(raw_content)
 
@@ -117,16 +127,13 @@ class GoogleParser(AbstractNewsParser):
         return parsed_content
 
 if __name__ == '__main__':
-    file = open('myFile', 'w')
-    
     google = GoogleParser()
     yahoo = YahooParser()
-    gnews = 'Google: \n', google.print_top_news()
-    ynews = 'Yahoo: \n', yahoo.print_top_news()
     
-    file.write(str(gnews))
+    #gnews = 'Google: \n', google.print_top_news()
+    #ynews = 'Yahoo: \n', yahoo.print_top_news()
+    
     print 'Google: \n', google.print_top_news()
     
-    file.write(str(ynews))
     print 'Yahoo: \n', yahoo.print_top_news()
     file.close()

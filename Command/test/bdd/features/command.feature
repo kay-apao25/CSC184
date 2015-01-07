@@ -5,7 +5,7 @@ Feature: Command Design Pattern; Able to create and delete files
 	Scenario Outline: Create and delete a file in the current diirectory
 	Given I run command file
 	When it creates and deletes a file
-	The I can see the following:
+	Then I can see the following:
 	|Processes											|
 	|Content of dir: myFile command.py test_file  		|
 	|Content of dir: myFile .test_file command.py  		|

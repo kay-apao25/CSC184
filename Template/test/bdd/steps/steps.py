@@ -12,4 +12,7 @@ def when_it_has_already_gathered_the_top_news_from_google_and_yahoo(step):
 
 @step(u'Then I can see the following:')
 def then_i_can_see_the_following(step):
-    assert True
+    file = open('myFile', 'r')
+    for row in step.hashes:
+        n = file.readline().splitlines()
+        assert_equal(n, row.values())
